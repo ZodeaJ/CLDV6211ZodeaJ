@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebAppPart1.Models.Venue>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Venues</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fa fa-add"></i> Add New Venue
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.VenueName)</th>
+            <th>@Html.DisplayNameFor(model => model.Location)</th> 
+            <th>@Html.DisplayNameFor(model => model.Capacity)</th> 
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.VenueName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Location)</td> 
+                <td>@Html.DisplayFor(modelItem => item.Capacity)</td> 
+                <td style="width: 120px; text-align: center;">
+                    <img src="@item.ImageUrl" alt="@item.VenueName" style="width:100px; height:auto;" />
+                </td>
+                <td style="white-space: nowrap;">
+                    <a asp-action="Edit" asp-route-id="@item.VenueId" class="btn btn-primary">
+                        <i class="fa fa-pencil"></i> Edit
+                    </a> |
+                    <a asp-action="Details" asp-route-id="@item.VenueId" class="btn btn-secondary">
+                        <i class="fa fa-eye"></i> Details
+                    </a> |
+                    <a asp-action="Delete" asp-route-id="@item.VenueId" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

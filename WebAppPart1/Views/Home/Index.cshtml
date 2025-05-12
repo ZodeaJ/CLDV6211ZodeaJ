@@ -1,0 +1,137 @@
+﻿@model WebAppPart1.Models.HomeViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h2>Reservation</h2>
+
+<!-- Table for displaying bookings -->
+<h3>Bookings</h3>
+ <!--Button to add new booking-->
+<p>
+    <a asp-controller="Bookings" asp-action="Create" class="btn btn-success">
+        <i class="fa fa-add"></i> Add New Booking
+    </a>
+</p>
+<table class="table table-bordered">
+    <!-- Columns for Booking ID, Booking Date, Actions-->
+    <tr>
+        <th>ID</th>
+        <th>Booking Date</th>
+        <th>Actions</th> 
+    </tr>
+    @foreach (var booking in Model.Bookings)
+    {
+        <tr>
+            <td>@booking.BookingId</td>
+            <!-- Format the date -->
+            <td>@booking.BookingDate.ToString("MM/dd/yyyy")</td> 
+            <td>
+                <!-- Edit button for booking -->
+                <a asp-controller="Bookings" asp-action="Edit" asp-route-id="@booking.BookingId" class="btn btn-primary">
+                    <i class="fa fa-pencil"></i> Edit
+                </a> |
+                <!-- Details button for booking -->
+                <a asp-controller="Bookings" asp-action="Details" asp-route-id="@booking.BookingId" class="btn btn-secondary">
+                    <i class="fa fa-eye"></i> Details
+                </a> |
+                <!-- Delete button for booking -->
+                <a asp-controller="Bookings" asp-action="Delete" asp-route-id="@booking.BookingId" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Table for displaying venues -->
+<h3>Venues</h3>
+<!--Button to add new venue-->
+<p>
+    <a asp-controller="Venues" asp-action="Create" class="btn btn-success">
+        <i class="fa fa-add"></i> Add New Venue
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <!-- Columns for Venues ID, Name, Location, Capacity, Image, Actions-->
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th> 
+        <th>Capacity</th> 
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var venue in Model.Venues)
+    {
+        <tr>
+            <td>@venue.VenueId</td>
+            <td>@venue.VenueName</td>
+            <td>@venue.Location</td>
+            <td>@venue.Capacity</td>  
+            <td style="width: 120px; text-align: center;">
+                <img src="@venue.ImageUrl" alt="@venue.VenueName" style="width:100px; height:auto;" />
+            </td>
+            <td style="white-space: nowrap;">
+                <!-- Edit button for venues -->
+                <a asp-controller="Venues" asp-action="Edit" asp-route-id="@venue.VenueId" class="btn btn-primary">
+                    <i class="fa fa-pencil"></i> Edit
+                </a> |
+                <!-- Details button for venues -->
+                <a asp-controller="Venues" asp-action="Details" asp-route-id="@venue.VenueId" class="btn btn-secondary">
+                    <i class="fa fa-eye"></i> Details
+                </a> |
+                <!-- Delete button for venues -->
+                <a asp-controller="Venues" asp-action="Delete" asp-route-id="@venue.VenueId" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Table for displaying events -->
+<h3>Events</h3>
+<!--Button to add new event-->
+<p>
+    <a asp-controller="Events" asp-action="Create" class="btn btn-success">
+        <i class="fa fa-add"></i> Add New Event
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <!-- Columns for Events ID, Name, Date, Description, Actions-->
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var eventItem in Model.Events)
+    {
+        <tr>
+            <td>@eventItem.EventId</td>
+            <td>@eventItem.EventName</td>
+            <td>@eventItem.EventDate.ToString("MM/dd/yyyy")</td>
+            <td>@eventItem.Description</td>
+            <td>
+                <!-- Edit button for events -->
+                <a asp-controller="Events" asp-action="Edit" asp-route-id="@eventItem.EventId" class="btn btn-primary">
+                    <i class="fa fa-pencil"></i> Edit
+                </a> |
+                <!-- Details button for events -->
+                <a asp-controller="Events" asp-action="Details" asp-route-id="@eventItem.EventId" class="btn btn-secondary">
+                    <i class="fa fa-eye"></i> Details
+                </a> |
+                <!-- Delete button for events -->
+                <a asp-controller="Events" asp-action="Delete" asp-route-id="@eventItem.EventId" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
